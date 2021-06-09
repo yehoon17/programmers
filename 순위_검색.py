@@ -1,32 +1,35 @@
 def solution(info, query):
     answer = []
-    infolist = []
-    scores = []
+    
+    d = {}
+    for lang in ('cpp', 'java', 'python'):
+        d[lang] = {}
+        for job in ('backend','frontend'):
+            d[lang][job] = {}
+            for exp in ('junior','senior'):
+                d[lang][job][exp] = {}
+                for food in ('chicken','pizza'):
+                    d[lang][job][exp][food] = []
+    
     for x in info:
         xlist = x.split()
-        scores.append(int(xlist[-1]))
-        xlist = list(map(lambda a:a[0],xlist[:-1]))
-        infolist.append(xlist)
+        d[xlist[0]][xlist[1]][xlist[2]][xlist[3]].append(int(xlist[4]))
+        
     for q in query:
-        qlist = q.split()
+        temp = q.split()
         count = 0
-        temp = []
+        qlist = [temp[i*2] for i in range(4)]
+        qscore = int(temp[-1])
+        temp = [d]
         for i in range(4):
-            temp.append(qlist[i*2][0])
-        qscore = int(qlist[-1])
-        for xlist,score in zip(infolist,scores):
-            flag = True
-            if qscore > score:
-                continue
-            for i in range(4):
-                if temp[i] == '-':
-                    pass
-                elif temp[i] != xlist[i]:
-                    flag = False
-                    break
-            if flag:
-                count+=1
-            
+            if qlist[i] == '-':
+                temp = [t[k] for t in temp for k in t]
+            else:
+                temp = [t[qlist[i]] for t in temp]
+        for t in temp:
+            for score in t:
+                if score >= qscore:
+                    count+=1
         answer.append(count)
     
     return answer
