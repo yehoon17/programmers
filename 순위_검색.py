@@ -1,3 +1,27 @@
+def binarySearch(nums, target):
+    size = len(nums)
+    if nums[-1]>=target:
+        return size
+    start = 0
+    end = size-1
+    while(not start > end):
+        mid = int((start+end)/2)
+        if nums[mid] == target:
+            index = mid
+            break
+        elif nums[mid] < target:
+            end = mid-1
+        else:
+            start = mid+1
+    else:
+        index = start
+        
+    while(nums[index]>=target):
+        index+=1
+    return index
+            
+    
+
 def solution(info, query):
     answer = []
     
@@ -13,13 +37,13 @@ def solution(info, query):
     
     for x in info:
         xlist = x.split()
-        li = d[xlist[0]][xlist[1]][xlist[2]][xlist[3]]
-        li.append(int(xlist[4]))
-        for i in range(len(li)-1,0,-1):
-            if li[i]>li[i-1]:
-                li[i],li[i-1] = li[i-1],li[i]
-            else:
-                break
+        d[xlist[0]][xlist[1]][xlist[2]][xlist[3]].append(int(xlist[4]))
+    
+    for d1 in d.values():
+        for d2 in d1.values():
+            for d3 in d2.values():
+                for li in d3.values():
+                    li.sort(reverse = True)
     
     for q in query:
         temp = q.split()
@@ -33,11 +57,8 @@ def solution(info, query):
             else:
                 temp = [t[qlist[i]] for t in temp]
         for t in temp:
-            for score in t:
-                if score >= qscore:
-                    count+=1
-                else:
-                    break
+            if not t == []:
+                count += binarySearch(t,qscore)
         answer.append(count)
     
     return answer
