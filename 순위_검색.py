@@ -13,14 +13,13 @@ def solution(info, query):
     
     for x in info:
         xlist = x.split()
-        d[xlist[0]][xlist[1]][xlist[2]][xlist[3]].append(int(xlist[4]))
-    
-    for d1 in d.values():
-        for d2 in d1.values():
-            for d3 in d2.values():
-                for li in d3.values():
-                    li.sort(reverse = True)
-    
+        li = d[xlist[0]][xlist[1]][xlist[2]][xlist[3]]
+        li.append(int(xlist[4]))
+        for i in range(len(li)-1,0,-1):
+            if li[i]>li[i-1]:
+                li[i],li[i-1] = li[i-1],li[i]
+            else:
+                break
     
     for q in query:
         temp = q.split()
