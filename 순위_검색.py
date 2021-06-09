@@ -14,7 +14,14 @@ def solution(info, query):
     for x in info:
         xlist = x.split()
         d[xlist[0]][xlist[1]][xlist[2]][xlist[3]].append(int(xlist[4]))
-        
+    
+    for d1 in d.values():
+        for d2 in d1.values():
+            for d3 in d2.values():
+                for li in d3.values():
+                    li.sort(reverse = True)
+    
+    
     for q in query:
         temp = q.split()
         count = 0
@@ -30,6 +37,8 @@ def solution(info, query):
             for score in t:
                 if score >= qscore:
                     count+=1
+                else:
+                    break
         answer.append(count)
     
     return answer
