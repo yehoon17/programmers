@@ -18,14 +18,13 @@ def solution(n, s, a, b, fares):
             now = bfs.popleft()
             visited[now] = True
             for i in range(n):
-                if costs[now][i] < MAX_INT:
-                    if not visited[i]:
-                        bfs.append(i)
-                    costs[start][i] \
-                    = min(costs[start][i],
-                          costs[start][now]\
-                          +costs[now][i])
-                    costs[i][start] = costs[start][i] 
+                if not visited[i]:
+                    bfs.append(i)
+                costs[start][i] \
+                = min(costs[start][i],
+                      costs[start][now]\
+                      +costs[now][i])
+                costs[i][start] = costs[start][i] 
     
     answer = MAX_INT*n+1
     for i in range(n):
