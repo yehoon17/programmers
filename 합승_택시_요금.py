@@ -20,15 +20,13 @@ def solution(n, s, a, b, fares):
             for i in range(n):
                 if not visited[i]:
                     bfs.append(i)
-                costs[start][i] \
-                = min(costs[start][i],
-                      costs[start][now]\
-                      +costs[now][i])
-                costs[i][start] = costs[start][i] 
+                if costs[start][i]>costs[start][now]+costs[now][i]:
+                    costs[start][i]=costs[start][now]+costs[now][i]
+                    costs[i][start] = costs[start][i] 
     
     answer = MAX_INT*n+1
     for i in range(n):
-        answer = min(answer,
-                     costs[s-1][i]+costs[a-1][i]+costs[b-1][i])
+        if answer>costs[s-1][i]+costs[a-1][i]+costs[b-1][i]:
+            answer=costs[s-1][i]+costs[a-1][i]+costs[b-1][i]
     
     return answer
