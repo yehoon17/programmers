@@ -1,40 +1,34 @@
 from collections import deque
 
-def get_cost(n,x,fares):
-    visited = [-1 for _ in range(n)]
-    visited[x-1] = 0
-    deq = deque([x])
-    while(deq):
-        p = deq.popleft()
-        for a,b,fare in fares:
-            temp = fare + visited[p-1]
-            if a == p:
-                if visited[b-1]<0:
-                    deq.append(b)
-                    visited[b-1] = temp
-                else:
-                    visited[b-1] = min(visited[b-1], temp)
-            if b == p:
-                if visited[a-1]<0:
-                    deq.append(a)
-                    visited[a-1] = temp
-                else:
-                    visited[a-1] = min(visited[a-1], temp) 
-    return visited
-    
 def solution(n, s, a, b, fares):
-    s_cost = get_cost(n,s,fares)
-    a_cost = get_cost(n,a,fares)
-    b_cost = get_cost(n,b,fares)
+    MAX_INT = 10000000000
+    costs = [[MAX_INT for _ in range(n)] for _ in range(n)]
     
-    answer = -1
     for i in range(n):
-        if s_cost[i]<0 or a_cost[i]<0 or b_cost[i]<0:
-            pass
-        else:
-            temp = s_cost[i] + a_cost[i] +b_cost[i]
-            if answer<0:
-                answer = temp
-            else:
-                answer = min(answer,temp)
+        costs[i][i] = 0
+    
+    for x,y,fare in fares:
+        costs[x-1][y-1] = fare
+        costs[y-1][x-1] = fare
+    
+    for start in (s-1,a-1,b-1):
+        bfs = deque([start])
+        visited = [False for _ in range(n)]
+        while(bfs):
+            now = bfs.popleft()
+            visited[now] = True
+            for i in range(n):
+                if costs[now][i] < MAX_INT:
+                    if not visited[i]:
+                        bfs.append(i)
+                    costs[start][i] \
+                    = min(costs[start][i],
+                          costs[start][now]\
+                          +costs[now][i])
+    
+    answer = MAX_INT*3+1
+    for i in range(n):
+        answer = min(answer,
+                     costs[s-1][i]+costs[a-1][i]+costs[b-1][i])
+    
     return answer
