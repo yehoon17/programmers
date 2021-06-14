@@ -1,7 +1,7 @@
 from collections import deque
 
 def solution(n, s, a, b, fares):
-    MAX_INT = 10000000000
+    MAX_INT = 10000000000000
     costs = [[MAX_INT for _ in range(n)] for _ in range(n)]
     
     for i in range(n):
@@ -25,8 +25,9 @@ def solution(n, s, a, b, fares):
                     = min(costs[start][i],
                           costs[start][now]\
                           +costs[now][i])
+                    costs[i][start] = costs[start][i] 
     
-    answer = MAX_INT*3+1
+    answer = MAX_INT*n+1
     for i in range(n):
         answer = min(answer,
                      costs[s-1][i]+costs[a-1][i]+costs[b-1][i])
