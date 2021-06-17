@@ -36,7 +36,7 @@ def solution(n, lost, reserve):
             
     for i in range(1,n-1):
         if isReserve[i]:
-            if isLost[i-1] and isLost[i+1]:
+            if isLost[i-1] or isLost[i+1]:
                 isReserve[i] = False
                 isLost[i-1] = False
                 answer+=1
