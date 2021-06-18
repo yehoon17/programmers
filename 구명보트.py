@@ -7,19 +7,18 @@ def solution(people, limit):
         if p>limit//2:
             boat.append(limit-p)
         else:
-            index = i
+            for j in range(len(people)-1,i-1,-1):
+                p = people[j]
+                while(boat):
+                    if p>boat[0]:
+                        boat.popleft()
+                        full+=1
+                    else:
+                        break
+                if boat:
+                    boat[0] -= p
+                else:
+                    boat.append(limit-p)
             break
-    for i in range(len(people)-1,index-1,-1):
-        p = people[i]
-        while(boat):
-            if p>boat[0]:
-                boat.popleft()
-                full+=1
-            else:
-                break
-        if boat:
-            boat[0] -= p
-        else:
-            boat.append(limit-p)
                 
     return len(boat)+full
