@@ -2,6 +2,8 @@ def solution(number, k):
     answer = ''
     start = 0
     while(k>0):
+        if len(number)-start == k:
+            return answer
         max = '0'
         for i in range(start,start+k+1):
             if max < number[i]:
