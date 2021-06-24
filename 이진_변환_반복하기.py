@@ -1,6 +1,11 @@
 def solution(s):
     zeros=s.count('0')
     n=s.count('1')
+    if n==1:
+        if zeros>0:
+            return [1,zeros]
+        else:
+            return [0,0]
     repeat=1
     while(True):
         temp=0
