@@ -17,4 +17,4 @@ def solution(m, n, puddles):
                         left = dp[i][j-1]
                     dp[i][j] = up + left
                 
-    return dp[-1][-1]
+    return dp[-1][-1]%1000000007
