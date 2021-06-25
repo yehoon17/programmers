@@ -6,7 +6,7 @@ def solution(n,a,b):
         answer+=1
         if large%2==0 and large==small+1:
             break
-        large//=2
-        small//=2
+        large=(large+1)//2
+        small=(small+1)//2
 
     return answer
