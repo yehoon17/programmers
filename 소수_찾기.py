@@ -1,11 +1,9 @@
 def solution(n):
-    prime = []
-    for i in range(2,n+1):
-        isPrime=True
-        for p in prime:
-            if i%p==0:
-                isPrime=False
-                break
-        if isPrime:
-            prime.append(i)
-    return len(prime)
+    temp = [1 for _ in range(n)]
+    temp[0] = 0
+    for i in range(2,int(n**0.5)+1):
+        if temp[i-1] == 1:
+            for j in range(i+1,n+1):
+                if j%i==0:
+                    temp[j-1]=0
+    return sum(temp)
