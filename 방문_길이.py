@@ -18,14 +18,14 @@ def solution(dirs):
                     answer+=1
         elif d == "R":
             if y<5:
-                if not visitedV[x][y]:
+                if not visitedH[x][y]:
                     visitedH[x][y] = True
                     answer+=1
                 y+=1
         elif d == "L":
             if y>-5:
                 y-=1
-                if not visitedV[x][y]:
+                if not visitedH[x][y]:
                     visitedH[x][y] = True
                     answer+=1
     
