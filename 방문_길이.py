@@ -1,7 +1,7 @@
 def solution(dirs):
     answer = 0
-    visitedV = [[False]*10 for _ in range(11)]
-    visitedH = [[False]*11 for _ in range(10)]
+    visitedV = [[False]*11 for _ in range(10)]
+    visitedH = [[False]*10 for _ in range(11)]
     x,y=0,0
     for d in dirs:
         if d == "U":
