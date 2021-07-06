@@ -1,5 +1,5 @@
 def isValid(board,i,j,n):
-    for k in range(n):
+    for k in range(i):
         if board[k][j]:
             return False
     for k in range(n):
