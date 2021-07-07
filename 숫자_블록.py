@@ -1,12 +1,15 @@
 def solution(begin, end):
-    answer = [0 for _ in range(begin,end+1)]
-    for i in range(1,end):
-        if i>10000000:
-            break
-        for j in range(begin,end+1):
-            if j>10000000:
+    answer = []
+    for i in range(begin,end+1):
+        if i==1:
+            answer.append(0)
+            continue
+        isPrime = True
+        for j in range(2,int(i**0.5)+1):
+            if i%j==0 and i//j<10000000:
+                answer.append(i//j)
+                isPrime = False
                 break
-            if j%i==0 and j>i:
-                answer[j-begin]=i
+        if isPrime:
+            answer.append(1)
     return answer
-        
