@@ -1,6 +1,6 @@
 def solution(begin, end):
     answer = []
-    isPrime = [True for _ in range(end+1)]
+    isPrime = [True for _ in range(1+min(end,10000000))]
     primes = []
     i=2
     while(True):
@@ -16,7 +16,7 @@ def solution(begin, end):
                 isPrime[temp]=False
         i+=1
     for i in range(begin,end+1):
-        if i==1:
+        if i==1 or i>10000000:
             answer.append(0)
             continue
         if i in primes:
