@@ -9,20 +9,8 @@ def isValid(board,i,j,n):
         else:
             break
     for k in range(n):
-        if i+k<n and j+k<n:
-            if board[i+k][j+k]:
-                return False
-        else:
-            break
-    for k in range(n):
         if i-k>=0 and j+k<n:
             if board[i-k][j+k]:
-                return False
-        else:
-            break
-    for k in range(n):
-        if i+k<n and j-k>=0:
-            if board[i+k][j-k]:
                 return False
         else:
             break
