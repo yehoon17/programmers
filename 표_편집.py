@@ -6,6 +6,17 @@ def solution(n, k, cmd):
         if c == 'C':
             exists[i] = False
             stack.append(i)
+            flag=True
+            for j in range(i+1,n):
+                if exists[j]:
+                    i=j
+                    flag=False
+                    break
+            if flag:
+                for j in range(i-1,-1,-1):
+                    if exists[j]:
+                        i=j
+                        break
         elif c == 'Z':
             exists[stack.pop()] = True
         else:
