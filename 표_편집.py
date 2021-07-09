@@ -24,14 +24,14 @@ def solution(n, k, cmd):
             z = int(y)
             if x == 'D':
                 while(z>0):
+                    i+=1 
                     if exists[i]:
                         z-=1
-                    i+=1    
             elif x == 'U':
                 while(z>0):
+                    i-=1 
                     if exists[i]:
                         z-=1
-                    i-=1 
     answer=''
     for x in exists:
         if x:
