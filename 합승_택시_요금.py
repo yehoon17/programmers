@@ -13,15 +13,17 @@ def solution(n, s, a, b, fares):
     for i in range(n):
         for k in range(n):
             for j in range(n):
-                if costs[i][k] > costs[i][j] + costs[j][k]:
-                    costs[i][k] = costs[i][j] + costs[j][k]
-                    costs[k][i] = costs[i][j] + costs[j][k]
+                temp = costs[i][j] + costs[j][k]
+                if costs[i][k] > temp:
+                    costs[i][k] = temp
+                    costs[k][i] = temp
                     
     for i in range(n):
         for k in range(n):
             for j in range(n):
-                if costs[i][k] > costs[i][j] + costs[j][k]:
-                    costs[i][k] = costs[i][j] + costs[j][k]
+                temp = costs[i][j] + costs[j][k]
+                if costs[i][k] > temp:
+                    costs[i][k] = temp
     
     answer = MAX_INT
     for i in range(n):
