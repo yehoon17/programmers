@@ -20,6 +20,12 @@ def solution(places):
                             if place[i+1][j+1] == 'P':
                                 answer.append(0)
                                 isValid = False
+                                break  
+                    if i<4 and j>0:
+                        if place[i+1][j] == 'O' or place[i][j-1] == 'O':
+                            if place[i+1][j-1] == 'P':
+                                answer.append(0)
+                                isValid = False
                                 break   
             if not isValid:
                 break
