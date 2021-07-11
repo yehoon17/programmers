@@ -27,6 +27,16 @@ def solution(places):
                                 answer.append(0)
                                 isValid = False
                                 break   
+                    if i<4:
+                        if place[i+1][j] == 'P':
+                            answer.append(0)
+                            isValid = False
+                            break   
+                    if j<4:
+                        if place[i][j+1] == 'P':
+                            answer.append(0)
+                            isValid = False
+                            break
             if not isValid:
                 break
         if isValid:
