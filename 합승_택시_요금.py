@@ -1,7 +1,6 @@
-from collections import deque
+MAX_INT = 100000*200
 
 def solution(n, s, a, b, fares):
-    MAX_INT = 1000001
     costs = [[MAX_INT for _ in range(n)] for _ in range(n)]
     
     for i in range(n):
@@ -11,23 +10,22 @@ def solution(n, s, a, b, fares):
         costs[x-1][y-1] = fare
         costs[y-1][x-1] = fare
     
-    for start in (s-1,a-1,b-1,s-1,a-1,b-1):
-        bfs = deque([start])
-        visited = [False for _ in range(n)]
-        while(bfs):
-            now = bfs.popleft()
-            visited[now] = True
-            for i in range(n):
-                if not visited[i]:
-                    bfs.append(i)
-                temp = costs[start][now]+costs[now][i]
-                if costs[start][i] > temp:
-                    costs[start][i] = temp
-                    costs[i][start] = temp 
+    for i in range(n):
+        for k in range(n):
+            for j in range(n):
+                if costs[i][k] > costs[i][j] + costs[j][k]:
+                    costs[i][k] = costs[i][j] + costs[j][k]
+                    costs[k][i] = costs[i][j] + costs[j][k]
+                    
+    for i in range(n):
+        for k in range(n):
+            for j in range(n):
+                if costs[i][k] > costs[i][j] + costs[j][k]:
+                    costs[i][k] = costs[i][j] + costs[j][k]
     
     answer = MAX_INT
     for i in range(n):
-        temp = costs[s-1][i]+costs[a-1][i]+costs[b-1][i]
+        temp = costs[i][a-1] + costs[i][b-1] + costs[s-1][i]
         if answer > temp:
             answer = temp
     
