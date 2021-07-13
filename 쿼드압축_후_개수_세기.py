@@ -1,8 +1,13 @@
 def solution(arr):
     answer = [0,0]
-    size =  len(arr)//2
+    size =  len(arr)
     neg = -5
     while(size>0):
+        if arr == [[0]]:
+            return [1,0]
+        if arr == [[1]]:
+            return [0,1]
+        size//=2
         temp = [[neg for _ in range(size)] for _ in range(size)]
         for i in range(size):
             for j in range(size):
@@ -19,5 +24,5 @@ def solution(arr):
                             if val>=0:
                                 answer[val]+=1
         arr=temp
-        size//=2
+    
     return answer
