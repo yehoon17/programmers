@@ -9,7 +9,7 @@ def solution(cookie):
             elif i+j<size:
                 temp[i][i+j] = temp[i][i+j-1]+cookie[i+j]
             else:
-                k = i-1-(size-i-j)
+                k = size-j-1
                 temp[i][k] = temp[i][k+1]+cookie[k]
                 
     answer = 0
