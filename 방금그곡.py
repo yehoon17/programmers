@@ -25,5 +25,5 @@ def solution(m, musicinfos):
             temp.append((title,playtime))
     if not temp:
         return ''
-    temp.sort(key=lambda x:x[1])
-    return temp[-1][0]
+    temp.sort(key=lambda x:x[1], reverse=True)
+    return temp[0][0]
