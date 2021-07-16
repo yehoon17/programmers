@@ -14,7 +14,7 @@ def modify(x):
     
 
 def solution(m, musicinfos):
-    answer = ''  
+    temp = []
     m_=modify(m)
     for musicinfo in musicinfos:
         start, end, title, chord = musicinfo.split(',')
@@ -22,5 +22,8 @@ def solution(m, musicinfos):
         playtime = (int(end[:2])-int(start[:2]))*60+int(end[-2:])-int(start[-2:])
         music = chord_*(playtime//len(chord_))+chord_[:playtime%len(chord_)]
         if m_ in music:
-            return title
-    return answer
+            temp.append((title,playtime))
+    if not temp:
+        return ''
+    temp.sort(key=lambda x:x[1])
+    return temp[-1][0]
