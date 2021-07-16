@@ -8,8 +8,8 @@ def modify(x):
         else:
             x_+=x[i]
             i+=1
-            if i==len(x)-1:
-                x_+=x[i]
+        if i==len(x)-1:
+            x_+=x[i]
     return x_
     
 
