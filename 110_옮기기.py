@@ -1,12 +1,14 @@
 def solution(string):
     answer = []
     for s in string:
-        temp = s
-        while('110' in temp):
-            temp = temp.replace('111100','')
-            temp = temp.replace('110','')
-            temp = temp.replace('110','')
-        temp = '0' + temp
+        temp = ['0']
+        for c in s:
+            temp.append(c)
+            if temp[-3:] == ['1','1','0']:
+                    temp.pop()
+                    temp.pop()
+                    temp.pop()
+        temp = ''.join(temp)
         count = (len(s) - len(temp) + 1)//3
         i = temp.rfind('0')
         s=temp[:i+1]+ '110'*count +temp[i+1:]
