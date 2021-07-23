@@ -1,5 +1,6 @@
 def solution(n, money):
     answer = 0
+    money.sort(reverse=True)
     dp = [n]
     for x in money:
         temp = []
