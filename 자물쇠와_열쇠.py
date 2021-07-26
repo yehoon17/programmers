@@ -12,9 +12,9 @@ def solution(key, lock):
         for y in range(M+N-1):
             for i in range(4):
                 k = np.rot90(key,i)
-                lock[x:x+N,y:y+N]+=k
+                lock[x:x+M,y:y+M]+=k
                 if np.array_equal(lock[M-1:M-1+N,M-1:M-1+N],ones):
                     return True
-                lock[x:x+N,y:y+N]-=k
+                lock[x:x+M,y:y+M]-=k
         
     return False
