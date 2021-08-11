@@ -1,18 +1,16 @@
 def solution(scores):
     answer = []
-    for i, score in enumerate(scores):
-        sum = get_sum(i, scores)
-        avg = get_avg(i, sum, score)
+    size = len(scores)
+    for i in range(size):
+        score = []
+        for j in range(size):
+            score.append(scores[j][i])
+        temp = sum(score)
+        avg = get_avg(i, temp, score)
         grade = get_grade(avg)
         answer.append(grade)
     return "".join(answer)
-
-def get_sum(i, scores):
-    temp = 0
-    for score in scores:
-        temp += score[i]
-    return temp
-            
+ 
 def get_avg(i, sum, score):
     MAX = max(score)
     MIN = min(score)
