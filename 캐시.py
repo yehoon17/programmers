@@ -1,17 +1,23 @@
 def solution(cacheSize, cities):
+    if cacheSize == 0:
+        return len(cities) * 5
     answer = 0
-    cache = {}
-    temp = 0
-    for i, city in enumerate(cities):
+    cache = []
+    for city in cities:
         city = city.lower()
-        if city in cache:
-            if cache[city] > i-cacheSize-1-temp:
-                answer+=1
-                temp+=1
-            else:
-                answer+=5
-                temp=0
-        else:
+        try:
+            start = cache.index(city)
+            for i in range(start, len(cache) - 1):
+                cache[i] = cache[i+1]
+            cache[-1] = city
+            answer+=1
+        except:
             answer+=5
-        cache[city] = i
+            if len(cache) < cacheSize:
+                cache.append(city)
+            else:
+                for i in range(len(cache) - 1):
+                    cache[i] = cache[i+1]
+                cache[-1] = city
+                
     return answer
