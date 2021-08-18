@@ -1,21 +1,10 @@
 def solution(n, money):
-    answer = 0
-    money.sort(reverse=True)
-    c = money.pop()
-    dp = [n]
+    dp = [0 for _ in range(n+1)]
+    dp[-1] = 1
     for x in money:
-        temp = []
-        for y in dp:
-            z = y
-            while(z>0):
-                temp.append(z)
-                z-=x
-                if z == 0:
-                    answer+=1
-        dp = temp
-        
-    for y in dp:
-        if y%c == 0:
-            answer+=1
-    
-    return answer%1000000007
+        for i in range(n,-1,-1):
+            if i<x:
+                break
+            dp[i-x]+=dp[i]
+            i-=x
+    return dp[0]%1000000007
