@@ -4,14 +4,13 @@ def solution(scoville, K):
     cnt = 0
     h = []
     for x in scoville:
-        if x < K:
-            heappush(h, x)
+        heappush(h, x)
     
-    while h:
+    while h[0] < K:
         if len(h) == 1:
             return -1
         new = heappop(h) + heappop(h) * 2
-        if new < K:
-            heappush(h, new)
+        heappush(h, new)
         cnt += 1
+        
     return cnt
