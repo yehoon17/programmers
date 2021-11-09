@@ -1,15 +1,5 @@
 def expend(num):
-    if num == "0":
-        return 0
-    
-    num = int(num)
-    zero = 1
-    while num % 10 == 0:
-        num //= 10
-        zero += 1
-    
-    num *= 10 ** (4 - len(str(num)))
-    num -= zero
+    num = num + num[-1] * (4 - len(num))
     
     return num
 
