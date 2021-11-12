@@ -1,7 +1,4 @@
 from itertools import combinations
 
 def solution(numbers):
-    s = set()
-    for x,y in combinations(numbers,2):
-        s.add(x+y)
-    return sorted(list(s))
+    return sorted(list({x + y for x, y in combinations(numbers, 2)}))
