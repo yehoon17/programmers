@@ -25,16 +25,16 @@ class Board:
         return heads
     
     def is_head(self, i, j):
-        area = product(range(2), range(2))
         if self.board[i][j]:
+            area = product(range(2), range(2))
             if len({self.board[i+x][j+y] for x, y in area}) == 1:
                 return True
         return False
                 
     def remove(self, heads):
         cnt = 0
-        area = product(range(2), range(2))
         for i, j in heads:
+            area = product(range(2), range(2))
             for x, y in area:
                 if self.board[i+x][j+y]:
                     self.board[i+x][j+y] = None
@@ -42,13 +42,14 @@ class Board:
         return cnt
         
     def fill_down(self):
-        for i in range(self.height-1, 0, -1):
+        for i in range(1, self.height):
             for j in range(self.width):
                 if not self.board[i][j]:
                     if self.board[i-1][j]:
                         self.board[i][j] = self.board[i-1][j]
+                        self.board[i-1][j] = None
     
-
+    
 def solution(m, n, board):
     b = Board(m, n, board)
     return b.play()
