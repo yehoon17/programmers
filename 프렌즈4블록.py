@@ -13,8 +13,7 @@ class Board:
             if not heads:
                 break
             cnt += self.remove(heads)
-            for _ in range(20):
-                self.fill_down()
+            self.fill_down()
         return cnt
     
     def heads(self):
@@ -43,12 +42,16 @@ class Board:
         return cnt
         
     def fill_down(self):
-        for i in range(1, self.height):
-            for j in range(self.width):
+        for j in range(self.width):
+            for i in range(self.height-1, 0, -1):
                 if not self.board[i][j]:
-                    if self.board[i-1][j]:
-                        self.board[i][j] = self.board[i-1][j]
-                        self.board[i-1][j] = None
+                    z = 1
+                    while i-z >= 0:
+                        if self.board[i-z][j]:
+                            self.board[i][j] = self.board[i-z][j]
+                            self.board[i-z][j] = None
+                            break
+                        z += 1
     
     
 def solution(m, n, board):
