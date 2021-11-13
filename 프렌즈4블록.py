@@ -13,7 +13,8 @@ class Board:
             if not heads:
                 break
             cnt += self.remove(heads)
-            self.fill_down()
+            for _ in range(20):
+                self.fill_down()
         return cnt
     
     def heads(self):
