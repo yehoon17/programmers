@@ -1,5 +1,15 @@
+from collections import deque
+
 def solution(stones, k):
-    answer = max(stones[:k])
-    for i in range(len(stones)-k):
-        answer = min(max(stones[i:i+k]), answer)
+    tmp = deque()
+    
+    for _ in range(k):
+        tmp.append(stones.pop())
+        
+    answer = max(tmp)
+    while stones:
+        tmp.append(stones.pop())
+        tmp.popleft()
+        answer = min(max(tmp), answer)
+        
     return answer
