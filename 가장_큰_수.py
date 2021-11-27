@@ -1,7 +1,5 @@
 def expend(num):
-    num = num + num[-1] * (4 - len(num))
-    
-    return num
+    return int((num*4)[:4])
 
 def solution(numbers):
     numbers = list(map(str, numbers))
