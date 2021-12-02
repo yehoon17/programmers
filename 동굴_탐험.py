@@ -23,18 +23,23 @@ def solution(n, path, order):
     parent_of, child_of = restruct(n, path)
     check = {y: x for x, y in order}
     
-    leaves = [k for k, v in child_of.items() if not v]
     valid = {0}
+    leaves = [k for k, v in child_of.items() if not v]
     for leaf in leaves:
         visited = set()
         node = leaf
-        while True:
+        bfs = deque()
+        while node > 0:
             if node in visited:
                 return False
             if node in valid:
-                break
+                if not bfs:
+                    break
+                else:
+                    node = bfs.popleft()
             visited.add(node)
             if node in check.keys():
+                bfs.append(parent_of[node])
                 node = check[node]
             else:
                 node = parent_of[node]
