@@ -1,35 +1,22 @@
-def winners_of(winner, win_from, n):
+def cascade(player, result_of, n):
     visited = [False for _ in range(n+1)]
-    winners = []
-    bfs = {winner}
+    players = []
+    bfs = {player}
     while bfs:
-        w = bfs.pop()
-        if not visited[w]:
-            visited[w] = True
-            winners.append(w)
-            bfs = bfs.union(win_from[w])
+        p = bfs.pop()
+        if not visited[p]:
+            visited[p] = True
+            players.append(p)
+            bfs = bfs.union(result_of[p])
 
-    return winners
-
-def losers_of(loser, lose_to, n):
-    visited = [False for _ in range(n+1)]
-    losers = []
-    bfs = {loser}
-    while bfs:
-        l = bfs.pop()
-        if not visited[l]:
-            visited[l] = True
-            losers.append(l)
-            bfs = bfs.union(lose_to[l])
-
-    return losers
+    return players
     
 def solution(n, results):
     win_from = {i+1: set() for i in range(n)}
     lose_to = {i+1: set() for i in range(n)}
     for winner, loser in results:
-        winners = winners_of(winner, win_from, n)
-        losers = losers_of(loser, lose_to, n)
+        winners = cascade(winner, win_from, n)
+        losers = cascade(loser, lose_to, n)
         for w in winners:
             for l in losers:
                 win_from[l].add(w)
