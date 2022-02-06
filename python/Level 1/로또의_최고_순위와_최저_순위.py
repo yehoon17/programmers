@@ -4,8 +4,7 @@ def solution(lottos, win_nums):
     for n in lottos:
         if n == 0:
             zero += 1
-        else:
-            if n in win_nums:
+        elif n in win_nums:
                 count += 1
 
     highRank = min(6, 7 - count - zero)
