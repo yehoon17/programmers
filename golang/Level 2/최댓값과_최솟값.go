@@ -3,8 +3,8 @@ import (
     "strconv"
 )
 func solution(s string) string {
-    max := -1000
-    min := 1000
+    max := -10000
+    min := 10000
     for _, n := range strings.Split(s, " ") {
         number, _ := strconv.Atoi(n)
         if max < number {
