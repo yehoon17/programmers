@@ -9,22 +9,17 @@ def solution(s):
             return [0, 0]
 
     repeat = 1
-    while True:
-        temp = 0
-        while True:
+    while n != 1:
+        ones = 0
+        while n != 0:
             if n % 2 == 0:
                 zeros += 1
             else:
-                temp += 1
+                ones += 1
                 
             n //= 2
-            if n == 0:
-                break
 
-        n = temp
         repeat += 1
+        n = ones
 
-        if temp == 1:
-            break
-
-    return[repeat, zeros]
+    return [repeat, zeros]
