@@ -2,7 +2,7 @@ def solution(N, number):
     dp = []
     i = 1
 
-    while(i < 9):
+    while i < 9:
         temp = [sum([N*(10**x) for x in range(i)])]
         if temp[0] == number:
             return i
