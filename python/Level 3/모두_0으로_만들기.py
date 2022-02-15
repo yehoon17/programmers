@@ -4,8 +4,8 @@ def dfs(parent, a, tree, size, visited):
 
     for child in tree[parent]:
         if not visited[child]:
-            a[parent] += a[child]
             total += dfs(child, a, tree, size, visited)
+            a[parent] += a[child]
             total += abs(a[child])
             a[child] = 0
 
