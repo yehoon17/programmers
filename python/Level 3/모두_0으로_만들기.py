@@ -1,3 +1,8 @@
+import sys
+
+sys.setrecursionlimit(255000)
+
+
 def dfs(parent, a, tree, size, visited):
     visited[parent] = True
     total = 0
