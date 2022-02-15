@@ -1,21 +1,15 @@
-def f(a, tree, size):
-    temp = [i for i in range(size) if sum(tree[i]) == 1]
-    if not temp:
-        return 0
+def dfs(parent, a, tree, size, visited):
+    visited[parent] = True
+    total = 0
 
-    if len(temp) == 2:
-        return abs(a[temp[0]])
-        
-    answer = 0
-    for i in temp:
-        j = [j for j in range(size) if tree[i][j] == 1][0]
-        a[j] += a[i]
-        answer += a[i]
-        a[i] = 0
-        tree[i][j] = 0
-        tree[j][i] = 0
+    for child in tree[parent]:
+        if not visited[child]:
+            a[parent] += a[child]
+            total += dfs(child, a, tree, size, visited)
+            total += abs(a[child])
+            a[child] = 0
 
-    return answer+f(a, tree, size)
+    return total
 
 
 def solution(a, edges):
@@ -23,9 +17,10 @@ def solution(a, edges):
         return -1
 
     size = len(a)
-    tree = [[0]*size for _ in range(size)]
+    visited = [False]*size
+    tree = {i: [] for i in range(size)}
     for x, y in edges:
-        tree[x][y] = 1
-        tree[y][x] = 1
+        tree[x].append(y)
+        tree[y].append(x)
 
-    return f(a, tree, size)
+    return dfs(0, a, tree, size, visited)
