@@ -1,26 +1,28 @@
 from itertools import combinations
 
 
-def winable(info, wins, n):
-    total = sum([info[idx] for idx in wins])
-    return len(wins) + total <= n
+def is_winable(n, info, overtake_idx):
+    total = sum([info[i] for i in overtake_idx])
+    return len(overtake_idx) + total <= n
 
 
-def get_gap(wins, info):
-    gap = 0
+def compare_score(info, overtake_idx):
+    score_gap = 0
     for i in range(11):
-        if i in wins:
-            gap += 10 - i
+        score = 10 - i
+        if i in overtake_idx:
+            score_gap += score
         elif info[i] > 0:
-            gap -= 10 - i
-    return gap
+            score_gap -= score
+
+    return score_gap
 
 
-def board_of(n, wins, info):
-    board = [0] * 11
-    for idx in wins:
-        score = info[idx] + 1
-        board[idx] += score
+def board_of(n, overtake_idx, info):
+    board = [0]*11
+    for i in overtake_idx:
+        score = info[i] + 1
+        board[i] += score
         n -= score
 
     board[-1] += n
@@ -28,27 +30,27 @@ def board_of(n, wins, info):
     return board
 
 
-def better(answer, board):
+def better(best_board, board):
     for idx in range(10, -1, -1):
-        if answer[idx] > board[idx]:
-            return answer
-        elif answer[idx] < board[idx]:
+        if best_board[idx] > board[idx]:
+            return best_board
+        elif best_board[idx] < board[idx]:
             return board
 
 
 def solution(n, info):
-    answer = [-1]
-    max_gap = 0
+    best_board = [-1]
+    max_score_gap = 0
 
-    for n_wins in range(1, 12):
-        for wins in combinations(range(11), n_wins):
-            if winable(info, wins, n):
-                gap = get_gap(wins, info)
-                board = board_of(n, wins, info)
-                if gap > max_gap:
-                    answer = board
-                    max_gap = gap
-                elif gap == max_gap and max_gap > 0:
-                    answer = better(answer, board)
+    for n_wins in range(1, 10):
+        for overtake_idx in combinations(range(11), n_wins):
+            if is_winable(n, info, overtake_idx):
+                score_gap = compare_score(info, overtake_idx)
+                board = board_of(n, overtake_idx, info)
+                if score_gap > max_score_gap:
+                    best_board = board
+                    max_score_gap = score_gap
+                elif score_gap == max_score_gap and max_score_gap > 0:
+                    best_board = better(best_board, board)
 
-    return answer
+    return best_board
