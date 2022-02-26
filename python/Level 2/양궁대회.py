@@ -1,12 +1,17 @@
 from itertools import combinations
 
 
-def get_gap(wins):
+def winable(info, wins, n):
+    total = sum([info[idx] for idx in wins])
+    return len(wins) + total <= n
+
+
+def get_gap(wins, info):
     gap = 0
     for i in range(11):
         if i in wins:
             gap += 10 - i
-        else:
+        elif info[i] > 0:
             gap -= 10 - i
     return gap
 
@@ -37,9 +42,8 @@ def solution(n, info):
 
     for n_wins in range(1, 12):
         for wins in combinations(range(11), n_wins):
-            total = sum([info[idx] for idx in wins])
-            if n_wins + total <= n:
-                gap = get_gap(wins)
+            if winable(info, wins, n):
+                gap = get_gap(wins, info)
                 board = board_of(n, wins, info)
                 if gap > max_gap:
                     answer = board
